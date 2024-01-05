@@ -14,31 +14,33 @@ However, such a converter has not been implemented yet.
 Also, the format itself is at a very early stage of development.
 
 
-### Structure
+### Ira file structure
  *  Header: 8 bytes
- *   *  4 bytes = 00 69 72 61 = ".ira"
+ *   *  4 bytes = `00 69 72 61` = `".ira"`
  *   *  1 byte  = version number
  *   *  1 byte  = a bunch of flags:
- *   *   *  Does the file have function names embeded?
+ *   *   *  Does the file have function names embedded?
  *   *   *  Does it have argument ranges for the functions?
- *   *   *  Embeded file description?
+ *   *   *  Embedded file description?
  *   *   *  Source code?
- *   *  4.09 bits = number of halfbyte opcodes : 0..16
+ *   *  4.09 bits = desired size of available memory : 0..16
  *   *  3.91 bits = flags to enable builtin functions : 1..15
  *   *   *  basic control flow operations?
  *   *   *  i32 operations?
  *   *   *  f64 operations?
  *   *   *  ?????????
  *   *  1 byte = number of one-byte opcodes : uint8
- *  Names of public functions or number of public functions depending on the corresponding flag.
- *  Optional types or ranges of arguments of public functions.
  *  Optional description.
  *  Optional source code.
- *  Bytecode itself: just a list of functions.
+ *  Bytecode itself:
+     *  Private functions.
+     *  Public functions in this format:
+         *  Optional function name.
+         *  Optional argument type and range.
+         *  Id of private function to call.
  *  Content of first bytes of linear memory.
 
 Problems:
- *  Where to store linear memory size?
  *  Redundant byte value 0 inside linear memory content.
 
 
@@ -47,5 +49,10 @@ Problems:
 - [x] Come up with a project name and file extension.
 - [ ] Design virtual machine instruction set.
 - [ ] Design file format structure.
+- [ ] Implement experimental mini-encoder.
+- [ ] Implement experimental mini-decoder.
+- [ ] Gather statistics.
+- [ ] Decide the fate of halfbytes.
+- [ ] Stabilize design.
 - [ ] Implement encoder.
 - [ ] Implement decoder.
