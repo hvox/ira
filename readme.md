@@ -17,27 +17,19 @@ Also, the format itself is at a very early stage of development.
 ### Ira file structure
  *  Header: 8 bytes
  *   *  4 bytes = `00 69 72 61` = `".ira"`
- *   *  1 byte  = version number
- *   *  1 byte  = a bunch of flags:
- *   *   *  Does the file have function names embedded?
- *   *   *  Does it have argument ranges for the functions?
- *   *   *  Embedded file description?
- *   *   *  Source code?
- *   *  4.09 bits = desired size of available memory : 0..16
- *   *  3.91 bits = flags to enable builtin functions : 1..15
- *   *   *  basic control flow operations?
- *   *   *  i32 operations?
- *   *   *  f64 operations?
- *   *   *  ?????????
- *   *  1 byte = number of one-byte opcodes : uint8
- *  Optional description.
- *  Optional source code.
- *  Bytecode itself:
-     *  Private functions.
-     *  Public functions in this format:
-         *  Optional function name.
-         *  Optional argument type and range.
-         *  Id of private function to call.
+ *   *  1 byte = version number
+ *   *  1 byte = number of one-byte opcodes : 0..255
+ *   *  2 bytes = module by which hashes should be divided : 1..65536
+ *  Optional extra options. Present only if module equals to 1.
+ *   *  Optional file description.
+ *   *  Optional source code.
+ *   *  Optional description of public function arguments.
+ *  Bytecode of private functions.
+ *  Directory structure in this format:
+ *  Public functions in this format:
+     *  Function hash or path if module = 1.
+     *  Argument type and range.
+     *  Id of private function to call.
  *  Content of first bytes of linear memory.
 
 Problems:
