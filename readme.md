@@ -1,4 +1,4 @@
-> [!Warning]  
+> [!Warning]
 > This project is at a very early stage of development. Do not use! Highly unstable!
 
 
@@ -16,14 +16,14 @@ Also, the format itself is at a very early stage of development.
 
 ### Ira file structure
  *  Header: 8 bytes
- *   *  4 bytes = `00 69 72 61` = `".ira"`
- *   *  1 byte = version number
- *   *  1 byte = number of one-byte opcodes : 0..255
- *   *  2 bytes = module by which hashes should be divided : 1..65536
+     *  4 bytes = `00 69 72 61` = `.ira`
+     *  1 byte = version number
+     *  1 byte = number of one-byte opcodes : 0..255
+     *  2 bytes = module by which hashes should be divided : 1..65536
  *  Optional extra options. Present only if module equals to 1.
- *   *  Optional file description.
- *   *  Optional source code.
- *   *  Optional description of public function arguments.
+     *  Optional file description.
+     *  Optional source code.
+     *  Optional description of public function arguments.
  *  Bytecode of private functions.
  *  Directory structure in this format:
  *  Public functions in this format:
