@@ -1,0 +1,30 @@
+#!/usr/bin/env python3
+"""
+Calculate the minimum number of bytes required to store various data.
+
+Usage: {script} [options]
+
+Options:
+    -h, --help
+        Show this screen and exit.
+"""
+import sys
+from contextlib import suppress
+from pathlib import Path
+from math import log2, ceil
+
+
+def main(script_name: str, *script_args: str):
+    doc = __doc__.format(script=Path(script_name).name)
+    if script_args:
+        print(doc.lstrip())
+        exit(len(script_args) != 1 or script_args[0] not in ["-h", "--help"])
+    n = ceil(log2(len(range(0, 256 + 1))))
+    print(f"To store number of one-byte opcodes we need {n} bits")
+    n = ceil(log2(sum(x * 256 + 1 for x in range(257))))
+    print(f"Configuration of varint from 1 to 4 bytes requires {n} bits")
+
+
+if __name__ == "__main__":
+    with suppress(KeyboardInterrupt):
+        main(sys.argv[0], *sys.argv[1:])
