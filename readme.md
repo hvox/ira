@@ -5,7 +5,7 @@
 # IRA format
 
 ### What is it for?
-IRA is a binary format for storing images as bytecode of compact virtual machine.
+IRA is a binary file format for storing images as bytecode of a compact virtual machine.
 When you open a file in this format the virtual machine executes the code
 inside the file and visualizes the result of the execution.
 This format is theoretically more optimal than any other in terms of file size,
@@ -17,23 +17,17 @@ Also, the format itself is at a very early stage of development.
 ### Ira file structure
  *  Header: 8 bytes
      *  4 bytes = `00 69 72 61` = `.ira`
-     *  1 byte = version number
+     *  1 byte = version number = 0 (pre-release)
      *  1 byte = number of one-byte opcodes : 0..255
-     *  2 bytes = module by which hashes should be divided : 1..65536
- *  Optional extra options. Present only if module equals to 1.
-     *  Optional file description.
-     *  Optional source code.
-     *  Optional description of public function arguments.
- *  Bytecode of private functions.
- *  Directory structure in this format:
- *  Public functions in this format:
-     *  Function hash or path if module = 1.
-     *  Argument type and range.
-     *  Id of private function to call.
- *  Content of first bytes of linear memory.
+     *  2 bytes = size of linear memory in 64KiB-pages : 1..65536
+ *  Bytecode of functions.
+    The last defined function is called and it is expected that this
+    function will generate the image and place it in the linear memory.
+    Image should be generated directly after bytes defined below.
+ *  First bytes of program's linear memory.
 
 Problems:
- *  Redundant byte value 0 inside linear memory content.
+ *  I don't have enough free time to do even a little bit of work on the project.
 
 
 ### Progress
